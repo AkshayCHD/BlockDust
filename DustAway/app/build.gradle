@@ -54,5 +54,6 @@ dependencies {
 
     compile 'com.ibm.watson.developer_cloud:java-sdk:3.7.2'
     compile 'com.ldoublem.thumbUplib:ThumbUplib:0.5'
+    compile 'com.microsoft.projectoxford:vision:1.0.374'
 }
 apply plugin: 'com.google.gms.google-services'

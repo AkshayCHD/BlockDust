@@ -1,6 +1,7 @@
 package com.example.akshay.dustaway;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -117,7 +118,7 @@ public class LauncherActivity extends AppCompatActivity {
 
     public void camera(View view)
     {
-        Intent i = new Intent(this, cameraActivity.class);
+        Intent i = new Intent(this, ImageDetection.class);
         startActivity(i);
     }
 
