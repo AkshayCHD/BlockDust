@@ -1,5 +1,5 @@
-var MovieContract = artifacts.require("./MovieContract.sol");
+var GarbageContract = artifacts.require("./GarbageContract.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(MovieContract);
+  deployer.deploy(GarbageContract);
 };

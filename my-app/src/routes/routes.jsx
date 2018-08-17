@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from '../client/pages/HomePage';
-import AddMovie from '../client/pages/AddMovie';
-
+import AddEther from '../client/pages/AddEther';
+import SendEther from '../client/pages/SendEther';
 const RenderRoutes = () => (
     <Router>
       <div>
         <Route path="/Home" component={HomePage} />
-        <Route path="/" component={AddMovie} />
+
+        <Route exact path="/" component={AddEther} />
+        <Route path="/Send" component={SendEther} />
       </div>
     </Router>
 );

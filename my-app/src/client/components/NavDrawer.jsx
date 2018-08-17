@@ -31,7 +31,7 @@ class NavDrawer extends React.Component {
   }
 
   openAdd() {
-    this.props.history.push('/AddMovie');
+    this.props.history.push('/Send');
   }
 
 
