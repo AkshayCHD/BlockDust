@@ -4,12 +4,16 @@ import HomePage from '../client/pages/HomePage';
 import AddEther from '../client/pages/AddEther';
 import SendEther from '../client/pages/SendEther';
 import ProfilePage from '../client/pages/ProfilePage';
+import LoginPage from '../client/pages/LoginPage';
+
 const RenderRoutes = () => (
     <Router>
       <div>
         <Route path="/Home" component={HomePage} />
         <Route exact path="/" component={AddEther} />
         <Route path="/Send" component={SendEther} />
+
+        <Route path="/Login" component={LoginPage} />
         <Route path="/Profile" component={ProfilePage} />
       </div>
     </Router>

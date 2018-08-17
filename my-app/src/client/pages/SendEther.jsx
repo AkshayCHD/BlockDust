@@ -3,6 +3,9 @@ import Typography from '@material-ui/core/Typography';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CountUp from 'react-countup';
+
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -10,6 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withRouter } from 'react-router-dom';
+import * as firebase from 'firebase';
 import Nav from '../components/Nav';
 import '../../App.css';
 import GarbageContract from '../blockchain/build/contracts/GarbageContract.json';
@@ -29,6 +33,9 @@ class SendEther extends Component {
       rating: 0,
       web3: null,
       successful: false,
+      point: 20,
+      ether: 0.5,
+      firebaseRef: null,
     }
     this.handleChange = this.handleChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
@@ -44,6 +51,22 @@ class SendEther extends Component {
     }).catch(() => {
       this.setState({ metamask: false });
       console.log('Error finding web3. Please make sure MetaMask is installed.');
+    });
+    const rootRef = firebase.database().ref().child('akshay');
+    const cleanerRef = rootRef.child('points');
+    this.setState({
+        firebaseRef: rootRef,
+    });
+    cleanerRef.on('value', snap=> {
+        this.setState({
+            point: snap.val(),
+        });
+        let points = snap.val();
+        let etherAva = points/200;
+        this.setState({
+            ether: etherAva,
+        });
+        
     });
   }
 
@@ -72,9 +95,8 @@ class SendEther extends Component {
     e.preventDefault();
     console.log("entered form submit");
 
-    let amount = parseInt(document.getElementById("amount").value);
-    console.log(amount);
-    amount = Math.ceil(amount);
+    let amount = this.state.ether;
+
     amount = amount.toString();
     const thisInstance = this;
     contractInstance.sendEther(
@@ -85,7 +107,7 @@ class SendEther extends Component {
       if (res) {
         console.log("*****************************");
         console.log(res);
-
+        this.state.firebaseRef.child('points').set(0);
         thisInstance.setState({ successful: true });
       }
     }).catch((err) => {
@@ -117,20 +139,38 @@ class SendEther extends Component {
         <Nav />
         <center>
           <Paper className="container" elevation={4}>
-            <Typography variant="headline" component="h3">
-              Add Amount.
-            </Typography>
-            <Typography component="p">
-              Disclaimer: These details can not be altered once they are set.
-            </Typography>
             <form noValidate autoComplete="off" onSubmit={this.formSubmit}>
-              <TextField
-                required
-                id="amount"
-                label="Enter your unique key"
-                className="textField"
-                margin="normal"
-              />
+            <Grid container justify="center" spacing={24}>
+            <Grid item >
+              <Paper style={{ height: 200, width: 200, padding: 35 }} elevation={4}>
+                <center>
+                  <CountUp
+                    className="count-animation"
+                    start={1000}
+                    end={this.state.point}
+                    duration={2.75}
+                    useEasing
+                  />
+                  <p>Points</p>
+                </center>
+              </Paper>
+            </Grid>
+            <Grid item >
+              <Paper style={{ height: 200, width: 200, padding: 35 }} elevation={4}>
+                <center>
+                  <CountUp
+                    className="count-animation"
+                    start={1000}
+                    end={this.state.ether}
+                    duration={2.75}
+                    useEasing
+                  />
+                  <p>Ether</p>
+                </center>
+              </Paper>
+            </Grid>
+          </Grid>
+      
               <center>
                 <Button variant="contained" color="primary" type="submit" className="login_button" >
                   Submit

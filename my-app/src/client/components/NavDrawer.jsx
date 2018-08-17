@@ -31,7 +31,15 @@ class NavDrawer extends React.Component {
   }
 
   openAdd() {
+    this.props.history.push('/');
+  }
+
+  openSend() {
     this.props.history.push('/Send');
+  }
+
+  openProfile() {
+    this.props.history.push('/Profile');
   }
 
 
@@ -53,16 +61,9 @@ class NavDrawer extends React.Component {
                 />
               </center>
 
-              <ListItem button >
-                <ListItemIcon>
-                  <Avatar className="redAvatar">
-                    <HomeIcon />
-                  </Avatar>
-                </ListItemIcon>
-                <ListItemText primary="Home" />
-              </ListItem>
+             
 
-              <ListItem button >
+              <ListItem button onClick={this.openProfile}>
                 <ListItemIcon>
                   <Avatar className="greenAvatar">
                     <AccountCircleIcon />
@@ -72,31 +73,23 @@ class NavDrawer extends React.Component {
                 <ListItemText primary="Profile" />
               </ListItem>
 
-              <ListItem button >
+              <ListItem button onClick={this.openSend}>
                 <ListItemIcon>
                   <Avatar className="blueAvatar">
                     <TimelineIcon />
                   </Avatar>
                 </ListItemIcon>
-                <ListItemText primary="All Auctions" />
+                <ListItemText primary="Transfer Balance" />
               </ListItem>
 
-              <ListItem button >
-                <ListItemIcon>
-                  <Avatar className="pinkAvatar">
-                    <AccountBalanceIcon />
-                  </Avatar>
-                </ListItemIcon>
-                <ListItemText primary="Your Bids" />
-              </ListItem>
-
+             
               <ListItem button onClick={this.openAdd}>
                 <ListItemIcon>
                   <Avatar className="yellowAvatar">
                     <AddIcon />
                   </Avatar>
                 </ListItemIcon>
-                <ListItemText primary="New Auction" />
+                <ListItemText primary="Donate Money" />
               </ListItem>
 
               <Divider />

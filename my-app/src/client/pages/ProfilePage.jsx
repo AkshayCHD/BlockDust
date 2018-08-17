@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import CountUp from 'react-countup';
@@ -75,7 +76,7 @@ class ProfilePage extends Component {
             </Grid>
           </Grid>
           <center>
-                <Button variant="contained" color="primary" onClick={this.} className="login_button" >
+                <Button variant="contained" color="primary" onClick={this.transfer} className="login_button" >
                   Transfer
                 </Button>
         </center>
@@ -87,4 +88,4 @@ class ProfilePage extends Component {
   
 }
 
-export default ProfilePage;
+export default withRouter(ProfilePage);
