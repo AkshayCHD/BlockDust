@@ -5,7 +5,7 @@ The project has 2 parts
 2) The Web App
 
 # To run the android application
-Just start the android studio, open application in it and run it.
+Just start the android studio, open dust away folder in it and run it.
 
 # To run the web application 
 * Move to the my-app directory by `cd my-app`  
@@ -17,4 +17,4 @@ Just start the android studio, open application in it and run it.
 `cd src/client/blockchain`  
 * run `truffle compile`  
 * run `truffle migrate --reset`  
-* run `npm start`  
+* return to directory my-app and run `npm start`  
