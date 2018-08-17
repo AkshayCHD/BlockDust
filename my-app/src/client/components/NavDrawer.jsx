@@ -10,6 +10,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import AddIcon from '@material-ui/icons/Add';
+import StarIcon from '@material-ui/icons/Stars';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/Help';
 import FeedbackIcon from '@material-ui/icons/Feedback';
@@ -23,7 +24,9 @@ class NavDrawer extends React.Component {
       loggedIn: false,
     };
     this.openAdd = this.openAdd.bind(this);
+    this.openProfile = this.openProfile.bind(this);
     this.handleClosing = this.handleClosing.bind(this);
+    this.openSend = this.openSend.bind(this);
   }
 
   handleClosing() {
@@ -31,7 +34,7 @@ class NavDrawer extends React.Component {
   }
 
   openAdd() {
-    this.props.history.push('/');
+    this.props.history.push('/Add');
   }
 
   openSend() {
@@ -39,7 +42,7 @@ class NavDrawer extends React.Component {
   }
 
   openProfile() {
-    this.props.history.push('/Profile');
+    this.props.history.push('/');
   }
 
 
@@ -66,11 +69,11 @@ class NavDrawer extends React.Component {
               <ListItem button onClick={this.openProfile}>
                 <ListItemIcon>
                   <Avatar className="greenAvatar">
-                    <AccountCircleIcon />
+                    <StarIcon />
                   </Avatar>
                 </ListItemIcon>
 
-                <ListItemText primary="Profile" />
+                <ListItemText primary="Leaderboard" />
               </ListItem>
 
               <ListItem button onClick={this.openSend}>

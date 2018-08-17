@@ -5,6 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CountUp from 'react-countup';
 
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -25,6 +28,10 @@ import getWeb3 from '../utils/getWeb3';
 let contractInstance = null;
 const contract = require('truffle-contract');
 
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
 class SendEther extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +47,9 @@ class SendEther extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.getAmount = this.getAmount.bind(this);
+    this.handleCloseUnsuccessful = this.handleCloseUnsuccessful.bind(this);
   }
+
   componentWillMount() {
     getWeb3.then((results) => {
       this.setState({
@@ -133,10 +142,23 @@ class SendEther extends Component {
     });
   }
 
+  handleCloseUnsuccessful() {
+    this.setState({
+      successful:false,
+    });
+  }
+  
   render() {
     return (
-      <div>
+      <div className="background_authorize">
         <Nav />
+        <Card className="timeline_header">
+              <CardContent className="flex_view">
+                <Typography variant="display3" component="h2" className="timeline_text">
+                  Transfer Amount
+                </Typography>
+              </CardContent>
+            </Card>
         <center>
           <Paper className="container" elevation={4}>
             <form noValidate autoComplete="off" onSubmit={this.formSubmit}>
@@ -170,20 +192,34 @@ class SendEther extends Component {
               </Paper>
             </Grid>
           </Grid>
-      
+          <br />
+          <br />
               <center>
                 <Button variant="contained" color="primary" type="submit" className="login_button" >
                   Submit
                 </Button>
               </center>
             </form>
-            <center>
-                <Button variant="contained" color="primary" onClick={this.getAmount} className="login_button" >
-                  See Amount
-                </Button>
-            </center>
+         
           </Paper>
         </center>
+        <Dialog
+          open={this.state.successful}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleCloseUnsuccessful}
+          aria-labelledby="alert-dialog-unsuccessful-title"
+          aria-describedby="alert-dialog-unsuccessful-description"
+        >
+          <DialogTitle id="alert-dialog-unsuccessful-title">
+            {'Transaction Successful.'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-unsuccessfule-description">
+              Amount was sucessfully transferred your account.
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }

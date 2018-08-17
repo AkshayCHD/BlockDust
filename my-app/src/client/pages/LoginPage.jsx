@@ -23,7 +23,7 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className='background_result'>
         <Nav />
         <center>
           <Paper className="container">

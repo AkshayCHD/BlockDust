@@ -3,33 +3,75 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
+
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import CountUp from 'react-countup';
 import Button from '@material-ui/core/Button';
 
+import CardContent from '@material-ui/core/CardContent';
+
+import Card from '@material-ui/core/Card';
 import * as firebase from 'firebase';
 import Nav from '../components/Nav';
 import '../../App.css';
+import CleanerList from '../components/CleanerList';
 
+const cleaners = [
+  {
+    name: 'Gurpreet',
+    points: 700,
+    Region: 'ludhiana',
+  },
+  {
+    name: 'Rahul',
+    points: 500,
+    Region: 'Pahad',
+  },
+  {
+    name: 'Bipin',
+    points: 400,
+    Region: 'UP',
+  },
+  {
+    name: 'Aman',
+    points: 90,
+    Region: 'Gaziabad',
+  },
+];
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
         point: 20,
         ether: 0.5,
+        cleaners: null,
     };
   }
 
   componentWillMount() {
+    this.state.cleaners = cleaners;
     const rootRef = firebase.database().ref().child('akshay');
     const cleanerRef = rootRef.child('points');
     cleanerRef.on('value', snap=> {
+
+        this.state.cleaners = cleaners;
         this.setState({
             point: snap.val(),
         });
-        let points = snap.val();
-        let etherAva = points/200;
+        let p = snap.val();
+        let etherAva = p/200;
+        let akshay = {
+          name: 'Akshay',
+          points: p,
+          Region: 'Roorkee',
+        };
+        this.state.cleaners.push(akshay);
+        this.state.cleaners.sort(function(a, b){
+          if(a.points < b.points) return 1;
+          if(a.points > b.points) return -1;
+          return 0;
+        })
         this.setState({
             ether: etherAva,
         });
@@ -40,47 +82,17 @@ class ProfilePage extends Component {
 
   render() {
       return (
-        <div>
+        <div className="background_main">
         <Nav />
+        <Card className="timeline_header">
+              <CardContent className="flex_view">
+                <Typography variant="display3" component="h2" className="timeline_text">
+                  Best Cleaners
+                </Typography>
+              </CardContent>
+        </Card>
         <center>
-        <Paper className="container" elevation={10}>
-        
-          <Grid container justify="center" spacing={24}>
-            <Grid item >
-              <Paper style={{ height: 200, width: 200, padding: 35 }} elevation={4}>
-                <center>
-                  <CountUp
-                    className="count-animation"
-                    start={1000}
-                    end={this.state.point}
-                    duration={2.75}
-                    useEasing
-                  />
-                  <p>Points</p>
-                </center>
-              </Paper>
-            </Grid>
-            <Grid item >
-              <Paper style={{ height: 200, width: 200, padding: 35 }} elevation={4}>
-                <center>
-                  <CountUp
-                    className="count-animation"
-                    start={1000}
-                    end={this.state.ether}
-                    duration={2.75}
-                    useEasing
-                  />
-                  <p>Ether</p>
-                </center>
-              </Paper>
-            </Grid>
-          </Grid>
-          <center>
-                <Button variant="contained" color="primary" onClick={this.transfer} className="login_button" >
-                  Transfer
-                </Button>
-        </center>
-        </Paper>
+          <CleanerList cleaners={this.state.cleaners}/>
         </center>
         </div>
       );

@@ -10,11 +10,11 @@ const RenderRoutes = () => (
     <Router>
       <div>
         <Route path="/Home" component={HomePage} />
-        <Route exact path="/" component={AddEther} />
+        <Route path="/Add" component={AddEther} />
         <Route path="/Send" component={SendEther} />
 
         <Route path="/Login" component={LoginPage} />
-        <Route path="/Profile" component={ProfilePage} />
+        <Route exact path="/" component={ProfilePage} />
       </div>
     </Router>
 );

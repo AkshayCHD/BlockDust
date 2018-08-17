@@ -4,11 +4,15 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slide';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import { withRouter } from 'react-router-dom';
 import Nav from '../components/Nav';
 import '../../App.css';
@@ -21,6 +25,10 @@ import getWeb3 from '../utils/getWeb3';
 let contractInstance = null;
 const contract = require('truffle-contract');
 
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 class AddEther extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +41,7 @@ class AddEther extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.getAmount = this.getAmount.bind(this);
+    this.handleCloseUnsuccessful = this.handleCloseUnsuccessful.bind(this);
   }
   componentWillMount() {
     getWeb3.then((results) => {
@@ -108,10 +117,23 @@ class AddEther extends Component {
     });
   }
 
+  handleCloseUnsuccessful() {
+    this.setState({
+      successful:false,
+    });
+  }
+
   render() {
     return (
-      <div>
+      <div className="background_create">
         <Nav />
+        <Card className="timeline_header">
+              <CardContent className="flex_view">
+                <Typography variant="display3" component="h2" className="timeline_text">
+                  Add Amount
+                </Typography>
+              </CardContent>
+            </Card>
         <center>
           <Paper className="container" elevation={4}>
             <Typography variant="headline" component="h3">
@@ -134,13 +156,28 @@ class AddEther extends Component {
                 </Button>
               </center>
             </form>
-            <center>
-                <Button variant="contained" color="primary" onClick={this.getAmount} className="login_button" >
-                  See Amount
-                </Button>
-            </center>
+            <br />
+            <br />
           </Paper>
         </center>
+        <Dialog
+          open={this.state.successful}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleCloseUnsuccessful}
+          aria-labelledby="alert-dialog-unsuccessful-title"
+          aria-describedby="alert-dialog-unsuccessful-description"
+        >
+          <DialogTitle id="alert-dialog-unsuccessful-title">
+            {'Transaction Successful.'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-unsuccessfule-description">
+              Amount was sucessfully transferred to Contract.
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
+        
       </div>
     );
   }
