@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from '../client/pages/HomePage';
 import AddEther from '../client/pages/AddEther';
 import SendEther from '../client/pages/SendEther';
+import ProfilePage from '../client/pages/ProfilePage';
 const RenderRoutes = () => (
     <Router>
       <div>
         <Route path="/Home" component={HomePage} />
-
         <Route exact path="/" component={AddEther} />
         <Route path="/Send" component={SendEther} />
+        <Route path="/Profile" component={ProfilePage} />
       </div>
     </Router>
 );
