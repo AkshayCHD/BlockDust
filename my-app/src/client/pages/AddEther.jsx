@@ -139,7 +139,7 @@ class AddEther extends Component {
             <Typography variant="headline" component="h3">
               Add Amount.
             </Typography>
-            <Typography component="p">
+            <Typography variant="body2" component="p">
               Disclaimer: These details can not be altered once they are set.
             </Typography>
             <form noValidate autoComplete="off" onSubmit={this.formSubmit}>

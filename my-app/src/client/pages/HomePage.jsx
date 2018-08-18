@@ -1,16 +1,36 @@
 import React, { Component } from 'react';
 import Nav from '../components/Nav';
+import '../../css/footer-distributed-with-address-and-phones.css';
+import Button from '@material-ui/core/Button';
+import logo from '../../images/logo.png';
+import logo1 from '../../images/bd.png';
+import carousel from '../../images/carousel.jpg';
+import Typing from 'react-typing-animation';
+import Paper from '@material-ui/core/Paper';
+import '../../App.css';
+import Vertical from '../components/stepper';
+import loader from '../../images/loader.gif';
+import facebook from '../../images/facebook.png'
+import google from '../../images/google-plus.png'
+import instagram from '../../images/instagram.png'
+import linkedin from '../../images/linkedin.png';
+import {withRouter} from 'react-router-dom';
 
 class HomePage extends Component {
     constructor(props) {
       super(props);
+      this.getStarted = this.getStarted.bind(this);
     }
 
     state = {loading: true}
 
     componentDidMount(){
-        setTimeout(() => this.setState({ loading: false }), 3500);
+        setTimeout(() => this.setState({ loading: false }), 1500);
     }  
+    getStarted() {
+        console.log("something");
+        this.props.history.push('/login');
+    }
 
     render() {
         const preloader = (<div style={{height: '100vh', width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img src={loader} alt="loader" /></div>)
@@ -45,8 +65,8 @@ class HomePage extends Component {
                         You don't beleive me, just sign up and get your money by making environment more greener and
                         your city less polluted. 
                     </p>
-                    <Button variant="contained" color="primary" className="signup_button">
-                        Sign Up
+                    <Button variant="contained" color="primary" onClick={this.getStarted} className="signup_button" style={{width: '500px'}}>
+                        Get Started
                     </Button>
                     
             </div>
@@ -118,4 +138,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default withRouter(HomePage);

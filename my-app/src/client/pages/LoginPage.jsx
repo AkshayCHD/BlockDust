@@ -49,7 +49,7 @@ export default class LoginPage extends Component {
                 className="textField"
               />
               <a href="." className="link">Forgot Password</a>
-              <Button type="submit" variant="contained" size="large" color="primary" className="login_button">
+              <Button variant="contained" color="primary" type="submit" className="login_button">
                 Login
               </Button>
               { 'Don\'t have an account? Sign up' } <Link to="/signup">here</Link>.
