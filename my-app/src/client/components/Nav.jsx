@@ -43,7 +43,7 @@ class Nav extends React.Component {
           <Toolbar>
             {drawerButton}
             <Typography variant="title" color="inherit" className="flex">
-              &nbsp;&nbsp;
+              &nbsp;&nbsp;Block Dust
             </Typography>
             {button}
           </Toolbar>
