@@ -570,3 +570,48 @@ width:50px !important ;
   background-repeat: repeat-y;
   background-size: cover;
 }
+
+.carousel{
+  margin: 0px;
+  object-fit: cover;
+}
+
+.indexlogo{
+  background-color:#dfe6e9;
+}
+
+.spanblock {
+  font-size: 75px;
+  font-weight: bold;
+}
+
+.typingdiv {
+  padding: 15px;
+}
+
+.indexcontent {
+  padding:20px;
+  font-size: 25px;
+}
+
+.signup_button {
+  margin: -40px;
+  width: 250px;
+}
+
+.MuiButton-label-102 {
+  width: 50px;
+  padding: 25px;
+  font-size: 30px;
+}
+
+.logo_index {
+  vertical-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top:18px;
+}
+
+.MuiTypography-body1-72 {
+  font-size: 25px !important;
+}
