@@ -564,7 +564,7 @@ width:50px !important ;
 
 .background_authorize {
   background: url("auctionAuthorize.png");
-  height: 100%;
+  height: 100vh;
   background-attachment: fixed; 
   background-position: center;
   background-repeat: repeat-y;

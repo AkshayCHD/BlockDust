@@ -16,28 +16,9 @@ import '../../App.css';
 class CleanerDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        point: 20,
-        ether: 0.5,
-    };
   }
 
-  componentWillMount() {
-    const rootRef = firebase.database().ref().child('akshay');
-    const cleanerRef = rootRef.child('points');
-    cleanerRef.on('value', snap=> {
-        this.setState({
-            point: snap.val(),
-        });
-        let points = snap.val();
-        let etherAva = points/200;
-        this.setState({
-            ether: etherAva,
-        });
-        
-    });
-  }
-
+  
 
   render() {
       return (
